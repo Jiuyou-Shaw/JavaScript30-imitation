@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Clock</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                font-size: 10px;
+                background: url(http://unsplash.it/1500/1000?image=881&blur=50);
+                background-size: cover;
+            }
+
+            body {
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+
+            .clock {
+                position: relative;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 40em;
+                height: 40em;
+                border: 2.5rem solid #fff;
+                border-radius: 50%;                
+            }
+
+            .hand {
+                position: absolute;
+                left: 50%;
+                bottom: 50%;
+                transform: translateX(-50%);
+                width: .7rem;
+                height: 16em;
+                background: #000;
+                transform-origin: 50% 100%;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="clock">
+            <div class="hand second"></div>
+            <div class="hand minute"></div>
+            <div class="hand hour"></div>
+        </div>
+        <script> 
+
+            oSec = document.querySelector(".second"),
+                   oMin = document.querySelector(".minute"),
+                   oHour = document.querySelector(".hour");  
+
+            function rotate() {
+
+                var nowTime = new Date(),                                   //const
+                    nowSec = nowTime.getSeconds(),
+                    nowMin = nowTime.getMinutes(),
+                    nowHour = nowTime.getHours(),
+                    
+                    degSec = nowSec * 6,
+                    degMin = nowMin * 6 + degSec / 60,
+                    degHour = nowHour * 30 + degMin / 60;
+
+                oSec.style["transform"] = "rotate(" + degSec + "deg)";      //`rotate(${degSec})`
+                oMin.style["transform"] = "rotate(" + degMin + "deg)";
+                oHour.style["transform"] = "rotate(" + degHour + "deg)";
+            }
+            
+            setInterval(rotate, 1000);
+            
+            window.addEventListener("load", rotate);                        //rotate()
+            
+        </script>
+    </body>
+</html>
