@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CSS Variables</title>
+        <style>
+            :root {
+                --color: #ffc600;
+                --spacing: 20px;
+                --blur: 10px;
+            }
+            html {
+                font: 50px "helvetica neue", sans-serif;
+                color: #fff;
+            }
+
+            body {
+                margin: 0;
+                background: #193549;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.5rem;                
+            } 
+            
+            h1 span {
+                color: var(--color);
+            }
+
+            .changer {
+                margin-bottom: 1rem;
+            }
+
+            img {
+                padding: var(--spacing);
+                background: var(--color);
+                filter: blur(var(--blur));
+            }
+             
+        </style>
+    </head>
+
+    <body>
+        
+        <h1>Updade CSS Variables with <span class="symbol">JS</span></h1>
+
+        <div class="changer">
+            <label for="spacing">Spacing:</label>
+            <input type="range" id="spacing" name="spacing" min="20" max="120" value="20" data-sizing="px">
+
+            <label for="blur">Blur:</label>
+            <input type="range" id="blur" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+            <label for="color">Basic Color:</label>
+            <input type="color" id="color" name="color" value="#ffc600">
+        </div>
+
+        <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+        <script>
+            const inputs = document.querySelectorAll(".changer input");
+
+            function changeStyle() {
+                const suffix = this.dataset.sizing || "";
+                document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+            }
+
+            inputs.forEach(input => input.addEventListener("change", changeStyle));
+            inputs.forEach(input => input.addEventListener("mousemove", changeStyle));
+        </script>
+    </body>
+</html>
