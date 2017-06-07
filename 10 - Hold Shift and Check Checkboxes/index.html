@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hold Shift to Check Multiple Checkboxes</title>
+        <style>
+            html {
+                font-size: 20px;
+                background: #ffc600;
+                box-sizing: border-box;
+            }
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+            .myForm {
+                max-width: 20rem;
+                margin: 2rem auto;
+                background: #fff;
+                border-radius: .5rem;
+                box-shadow: 10px 10px 2px rgba(0,0,0,.2);
+
+            }
+            .item {
+                height: 3rem;
+                line-height: 3rem;    
+                border-bottom: 1px solid #eee;
+            }
+            input {
+                width: 12%;
+                margin: 0;
+            }
+            input:checked + label {         /**/
+                background: #f1f1f1;
+                text-decoration: line-through;
+            }
+            label {
+                display: inline-block;
+                width: 88%;
+                height: 100%;
+                padding-left: 1rem;
+                border-left: 1px solid #eee;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <form class="myForm">
+            <div class="item"><input type="checkbox" name="item1"><label for="item1">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item2"><label for="item2">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item3"><label for="item3">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item4"><label for="item4">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item5"><label for="item5">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item6"><label for="item6">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item7"><label for="item7">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item8"><label for="item8">This is an inbox layout.</label></div>
+            <div class="item"><input type="checkbox" name="item9"><label for="item9">This is an inbox layout.</label></div>
+        </form>
+        <script>
+
+            const checkboxes = document.querySelectorAll(`.item input[type="checkbox"]`);            
+
+            let lastone;
+            let inbetween = false;
+
+            function multipleCheck(e) {                
+                if(e.shiftKey && this.checked && lastone && lastone.checked) {
+                    checkboxes.forEach(checkbox => {
+                        if(checkbox === this || checkbox === lastone) {
+                            inbetween = !inbetween;
+                        }
+                        if(inbetween && lastone != this) {
+                            checkbox.checked = true;
+                        }
+                    });
+                }
+                lastone = this;
+            }
+
+            checkboxes.forEach(checkbox => checkbox.addEventListener("click", multipleCheck));
+
+        </script>
+    </body>
+</html>
