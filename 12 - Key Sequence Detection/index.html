@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Key Detection</title>
+    </head>
+
+    <body>
+        <script>
+
+            const arr = [];
+            const target = "wesbos";
+
+            function keyDetection(event) {                
+                arr.push(event.key);
+
+                if(arr.length > target.length) {
+                    arr.shift();
+                }
+                //arr.splice(0, arr.length - target.length);
+                console.log(arr);   
+
+                if(arr.join("").includes(target)) {
+                    console.log("DING DING!");
+                }
+               
+            }
+
+            window.addEventListener("keyup", keyDetection);
+        </script>
+    </body>
+</html>
