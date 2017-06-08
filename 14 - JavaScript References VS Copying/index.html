@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS Reference VS Copy</title>
+    </head>
+
+    <body>
+        <script>
+
+            let age = 100;
+            let age2 = age;
+            console.log(age, age2);     
+
+            age = 200;
+            console.log(age, age2);     
+
+
+
+            let name = "Wes";
+            let name2 = name;
+            console.log(name, name2);
+            name = "Wesley";
+            console.log(name, name2);
+
+
+
+            const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+            const team = players;
+            console.log(players, team);
+
+            team[3] = "Lux";
+            console.log(players, team);     //players changed
+            
+            const team2 = players.splice();
+            console.log(players, team2);
+            team2[3] = "Bux";
+            console.log(players, team2);    //no change
+
+            const team3 = [].concat(players);
+            team3[3] = "Dux";
+            console.log(players, team3);    //no change
+
+            const team4 = [...players];
+            team4[3] = "Fux";
+            console.log(players, team4);    //no change
+
+            const team5 = Array.from(players);
+            team5[3] = "Gux";
+            console.log(players, team5);    //no change 
+
+
+
+            const person = {
+                name: 'Wes Bos',
+                age: 80
+            };
+
+            const cap2 = Object.assign({}, person, {name: "Weskey", number: 99, age: 12});
+            console.log(cap2);
+
+            const wes = {
+                name: 'Wes',
+                age: 100,
+                social: {
+                    twitter: '@wesbos',
+                    facebook: 'wesbos.developer'
+                }
+            };
+
+            const dev = Object.assign({}, wes);
+            console.log(dev);
+
+            const dev2 = JSON.parse(JSON.stringify(wes));
+            console.log(dev2);
+            
+        </script>
+    </body>
+</html>
