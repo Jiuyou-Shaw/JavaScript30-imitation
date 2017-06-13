@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sort Without Articles</title>
+        <style>
+            html {
+                font-family: sans-serif;
+                font-size: 20px;
+                background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+                background-size: cover;                
+            }
+
+            body {
+                margin: 0;
+            }
+
+            .lists {
+                width: 25rem;
+                margin: 15rem auto;                
+                background: #fff;
+                box-shadow: 0 0 0 .5rem rgba(0,0,0,.1);
+            }
+
+            .lists li {
+                padding: .5rem .2rem;
+                border-bottom: 1px solid #f1f1f1;
+            }
+        </style>
+    </head>
+
+    <body>
+        
+            <ul class="lists">
+                <li>a</li>
+                <li>b</li>
+            </ul>
+        
+        <script>
+            const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+            const lists = document.querySelector(".lists");
+            
+            function strip(bandName) {
+                return bandName.replace(/^(a |an |the )/i, "").trim();
+            }
+            const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+            lists.innerHTML =
+                sortedBands
+                    .map(band => `<li>${band}</li>`)
+                    .join("");
+            
+        </script>
+    </body>
+</html>
